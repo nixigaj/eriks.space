@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ $.Site.LanguageCode }}">
+    {{- partial "head.html" . -}}
+    <body a="{{ $.Site.Params.theme_config.appearance | default "auto" }}">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+
+                <div class="post-meta">
+                    {{ partial "back_link.html" .}}
+                    <p>
+                        <time datetime="{{ .Date }}">
+                            {{ .Date | time.Format site.Params.theme_config.date_format }}
+                        </time>
+                    </p>
+                </div>
+                {{- block "main" . }}{{- end }}
+				<div style="text-align: center; padding-top: 1rem">
+					{{ partial "footer.html" }}
+				</div>
+				<img src="/assets/img/logo-black.svg" alt="Logo" width="400px" class="svg-logo" style="padding-top: 1rem;">
+            </div>
+        </main>
+    </body>
+    {{- if .Params.custom_js -}}
+        {{- range .Params.custom_js -}}
+            {{ $js := resources.Get (print "js/" . ".js") }}
+            <script type="text/javascript" src="{{ $js.RelPermalink }}"></script>
+        {{- end -}}
+    {{- end -}}
+</html>

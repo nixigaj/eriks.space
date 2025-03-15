@@ -1,0 +1,17 @@
+@font-face {
+	font-family: 'EriksSpaceLinks';
+	src: url('EriksSpaceLinks.woff2') format('woff2'),
+		url('EriksSpaceLinks.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'EriksSpaceName';
+	src: url('EriksSpaceName.woff2') format('woff2'),
+		url('EriksSpaceName.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}

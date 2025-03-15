@@ -1,0 +1,5 @@
+[[entries]]
+title = "Posts"
+  [entries.post_list]
+  show_more = false
+

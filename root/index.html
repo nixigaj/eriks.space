@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<title>Erik's Space</title>
+	<meta name="description" content="Erik Junsved's personal website and blog">
+	<meta charset="utf-8">
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" sizes="32x32" href="assets/img/favicon-32x32.png">
+	<link rel="icon" sizes="16x16" href="assets/img/favicon-16x16.png">
+	<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+	<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+	<link rel="mask-icon" href="assets/img/mask-favicon.svg" color="#3333ff">
+	<link rel="stylesheet" href="assets/font/eriks-space/stylesheet.css">
+	<style>
+		:root {
+			font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu,
+			Cantarell, 'Noto Sans', sans-serif, BlinkMacSystemFont, Helvetica, Arial,
+			'Apple Color Emoji', 'Segoe UI Emoji',  'Segoe UI Symbol';
+			font-synthesis: none;
+			text-rendering: optimizeLegibility;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+			-webkit-text-size-adjust: 100%;
+			color-scheme: light dark;
+		}
+
+		code {
+			font-family: 'Cascadia Code', 'JetBrains Mono', Menlo, Monaco, Consolas,
+			'Liberation Mono', 'Courier New', monospace;
+			overflow-wrap: anywhere;
+		}
+
+		html, body {
+			padding: 0;
+			margin: 0;
+			height: 100%;
+			background: #fff;
+		}
+
+		body {
+			display: flex;
+			overflow: hidden;
+			position: relative;
+			flex-direction: column;
+		}
+
+		@media not (prefers-color-scheme: dark) {
+			.earthimg {
+				mix-blend-mode: hard-light;
+			}
+		}
+
+		a:hover {
+			text-decoration: underline;
+			text-decoration-thickness: 2px;
+		}
+
+		#graincover {
+			position: absolute;
+			top: 0;
+			left: 0;
+			opacity: 1.0;
+			height: 100%;
+			width: 100%;
+			z-index: 2;
+			mix-blend-mode: color-burn;
+
+			background:transparent url("assets/homepage/grain-overlay.png") repeat;
+			background-size: 200px;
+		}
+
+		#grainimg {
+			display: none;
+			background-repeat: repeat;
+		}
+
+		#videocover {
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: rgba(0, 0, 0, 0);
+			height: 100%;
+			width: 100%;
+			z-index: 1;
+			backdrop-filter: blur(50px);
+			-webkit-backdrop-filter: blur(50px);
+		}
+
+		.backvid {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			/*filter: blur(50px);*/
+		}
+
+		#vid-dark {
+			display:none;
+		}
+
+		a {
+			color: black;
+			text-decoration: none;
+		}
+
+		.rootbox {
+			flex: 1;
+			position: relative;
+		}
+
+		.titlebox {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			margin: 0 0 0 5rem;
+		}
+
+		.logoimg {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			margin: 0;
+			width: 600px;
+			z-index: 2;
+		}
+
+		.earthimg {
+			position: absolute;
+			right: 0;
+			top: 50%;
+			transform: translateY(-50%);
+			image-rendering: pixelated;
+			image-rendering: -moz-crisp-edges;
+			image-rendering: crisp-edges;
+			margin-right: 5rem;
+			-webkit-filter: drop-shadow(0px 5px 10px #0005);
+			filter: drop-shadow(0px 5px 10px #0005);
+			z-index: 2;
+		}
+
+		.nametext {
+			font-family: EriksSpaceName, "JetBrains Mono", "Cascadia Code", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+			color: #fff;
+			font-size: 100px;
+			margin-bottom: -2rem;
+			margin-top: -2rem;
+			padding-bottom: 0;
+			transform: scaleY(0.5);
+			text-shadow: -3px -6px 0 #000, 1px 2px 0 #000;
+			@media (prefers-color-scheme: dark) {
+				text-shadow: -3px -6px 0 #fff, 1px 2px 0 #fff;
+			}
+		}
+
+		.linkstext {
+			padding-top: 0;
+			margin-top: 0;
+			font-family: EriksSpaceLinks, "JetBrains Mono", "Cascadia Code", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+			font-size: 18px;
+		}
+
+		/* === Media Query: max-height:205px === */
+		@media (max-height: 205px) {
+			.nametext {
+				font-size: 50px;
+				margin-bottom: -1rem;
+				margin-top: 0;
+				text-shadow: -1.5px -3px 0 #000, 0.5px 1px 0 #000;
+				@media (prefers-color-scheme: dark) {
+					text-shadow: -1.5px -3px 0 #fff, 0.5px 1px 0 #fff;
+				}
+			}
+			.linkstext {
+				margin-bottom: 0.2rem;
+			}
+		}
+
+		/* === Media Query: max-width:1150px === */
+		@media (max-width: 1150px) {
+			.titlebox {
+				margin-right: 25rem;
+			}
+			.nametext {
+				margin-bottom: -4rem;
+			}
+		}
+
+		/* === Media Query: max-width:1150px and max-height:330px === */
+		@media (max-width: 1150px) and (max-height: 330px) {
+			.nametext {
+				font-size: 50px;
+				margin-bottom: -1rem;
+				margin-top: 0;
+				text-shadow: -1.5px -3px 0 #000, 0.5px 1px 0 #000;
+				@media (prefers-color-scheme: dark) {
+					text-shadow: -1.5px -3px 0 #fff, 0.5px 1px 0 #fff;
+				}
+			}
+			.linkstext {
+				margin-bottom: 0.2rem;
+			}
+		}
+
+		/* === Media Query: max-width:650px === */
+		@media (max-width: 650px) {
+			.logoimg {
+				width: 400px;
+			}
+		}
+
+		/* === Media Query: max-width:420px === */
+		@media (max-width: 420px) {
+			.logoimg {
+				width: 300px;
+			}
+		}
+
+		/* === Media Query: max-width:300px === */
+		@media (max-width: 300px) {
+			.logoimg {
+				width: 100%;
+			}
+		}
+
+		/* === Media Query: max-width:850px === */
+		@media (max-width: 850px) {
+			.earthimg {
+				right: unset;
+				left: 50%;
+				transform: translate3d(-50%, -50%, 0);
+			}
+			.titlebox {
+				bottom: unset;
+				top: 0;
+				margin-left: 1rem;
+				margin-top: -1.5rem;
+			}
+		}
+
+		/* === Media Query: max-width:850px and max-height:510px === */
+		@media (max-width: 850px) and (max-height: 510px) {
+			.nametext {
+				font-size: 75px;
+				margin-bottom: -2rem;
+				margin-top: 0.5rem;
+				text-shadow: -2.25px -4.5px 0 #000, 0.75px 1.5px 0 #000;
+				@media (prefers-color-scheme: dark) {
+					text-shadow: -2.25px -4.5px 0 #fff, 0.75px 1.5px 0 #fff;
+				}
+			}
+			.linkstext {
+				margin-bottom: 0.2rem;
+			}
+			.titlebox {
+				margin-right: 1rem;
+			}
+		}
+
+		/* === Media Query: max-width:590px and max-height:510px (overrides within above) === */
+		@media (max-width: 590px) and (max-height: 510px) {
+			.titlebox {
+				margin-right: 3rem;
+			}
+			.nametext {
+				margin-bottom: -3rem;
+				margin-top: -1rem;
+			}
+		}
+
+		/* === Media Query: max-width:850px and max-height:310px === */
+		@media (max-width: 850px) and (max-height: 310px) {
+			.nametext {
+				font-size: 50px;
+				margin-bottom: -1rem;
+				margin-top: 1rem;
+				text-shadow: -1.5px -3px 0 #000, 0.5px 1px 0 #000;
+				@media (prefers-color-scheme: dark) {
+					text-shadow: -1.5px -3px 0 #fff, 0.5px 1px 0 #fff;
+				}
+			}
+			.linkstext {
+				margin-bottom: 0.2rem;
+			}
+			.titlebox {
+				margin-right: 1rem;
+			}
+		}
+
+		/* === Media Query: max-width:590px and max-height:310px (overrides within above) === */
+		@media (max-width: 590px) and (max-height: 310px) {
+			.titlebox {
+				margin-right: 3rem;
+			}
+			.nametext {
+				margin-bottom: -3rem;
+				margin-top: -1rem;
+			}
+		}
+
+		/* === Media Query: max-width:450px === */
+		@media (max-width: 450px) {
+			.nametext {
+				font-size: 75px;
+				margin-bottom: -3rem;
+				margin-top: -1rem;
+				text-shadow: -2.25px -4.5px 0 #000, 0.75px 1.5px 0 #000;
+				@media (prefers-color-scheme: dark) {
+					text-shadow: -2.25px -4.5px 0 #fff, 0.75px 1.5px 0 #fff;
+				}
+			}
+			.linkstext {
+				margin-bottom: 0.2rem;
+			}
+		}
+
+		/* === Media Query: max-width:350px === */
+		@media (max-width: 350px) {
+			.nametext {
+				font-size: 50px;
+				margin-bottom: -2rem;
+				margin-top: 0;
+				text-shadow: -1.5px -3px 0 #000, 0.5px 1px 0 #000;
+				@media (prefers-color-scheme: dark) {
+					text-shadow: -1.5px -3px 0 #fff, 0.5px 1px 0 #fff;
+				}
+			}
+			.linkstext {
+				margin-bottom: 0.2rem;
+			}
+			.titlebox {
+				margin-right: 1rem;
+			}
+		}
+
+		/* === Media Query: max-width:450px and max-height:460px === */
+		@media (max-width: 450px) and (max-height: 460px) {
+			.nametext {
+				font-size: 50px;
+				margin-bottom: -1rem;
+				margin-top: 1rem;
+				text-shadow: -1.5px -3px 0 #000, 0.5px 1px 0 #000;
+				@media (prefers-color-scheme: dark) {
+					text-shadow: -1.5px -3px 0 #fff, 0.5px 1px 0 #fff;
+				}
+			}
+			.linkstext {
+				margin-bottom: 0.2rem;
+			}
+			.titlebox {
+				margin-right: 1rem;
+			}
+		}
+
+		/* === Media Query: max-width:410px and max-height:460px (override within above) === */
+		@media (max-width: 410px) and (max-height: 460px) {
+			.nametext {
+				margin-bottom: -2rem;
+				margin-top: 0;
+			}
+			.titlebox {
+				margin-right: 2rem;
+			}
+		}
+
+		/* === Media Query: max-width:300px and max-height:460px (further override) === */
+		@media (max-width: 300px) and (max-height: 460px) {
+			.titlebox {
+				margin-right: 1rem;
+			}
+		}
+
+		/* === Media Query: max-width:590px and max-height:460px === */
+		@media (max-width: 590px) and (max-height: 460px) {
+			.nametext {
+				font-size: 50px;
+				margin-bottom: -1rem;
+				margin-top: 1rem;
+				text-shadow: -1.5px -3px 0 #000, 0.5px 1px 0 #000;
+				@media (prefers-color-scheme: dark) {
+					text-shadow: -1.5px -3px 0 #fff, 0.5px 1px 0 #fff;
+				}
+			}
+			.linkstext {
+				margin-bottom: 0.2rem;
+			}
+			.titlebox {
+				margin-right: 1rem;
+			}
+		}
+
+		/* === Media Query: max-width:410px and max-height:460px within (590px) context === */
+		@media (max-width: 410px) and (max-height: 460px) {
+			.nametext {
+				margin-bottom: -2rem;
+				margin-top: 0;
+			}
+			.titlebox {
+				margin-right: 3rem;
+			}
+		}
+
+		/* === Media Query: max-width:300px and max-height:460px within (590px) context === */
+		@media (max-width: 300px) and (max-height: 460px) {
+			.titlebox {
+				margin-right: 1rem;
+			}
+		}
+
+		@media (prefers-color-scheme: dark) {
+			html, body, .rootbox {
+				background: #000;
+				color: white;
+			}
+			.logoimg {
+				content:url("assets/img/logo-black.svg");
+			}
+			.earthimg {
+				mix-blend-mode: lighten;
+			}
+			.nametext {
+				color: #000;
+				-webkit-filter: drop-shadow(0px 0px 40px #fff5);
+				filter: drop-shadow(0px 0px 40px #fff5);
+			}
+			#vid-dark {
+				display:block;
+			}
+			#vid-light {
+				display:none;
+			}
+			a {
+				color: white;
+			}
+			#graincover {
+				mix-blend-mode: overlay;
+			}
+		}
+	</style>
+</head>
+
+<body>
+<div class="rootbox">
+	<div class="titlebox">
+		<h1 aria-label="My name" class="nametext">Erik Junsved</h1>
+		<p aria-label="Links" class="linkstext">{<a href="/about">about</a>, <a href="/blog">blog</a>, <a target="_self" href="https://github.com/nixigaj">github</a>}</p>
+	</div>
+</div>
+<div class="rootbox" style="overflow:hidden;">
+	<div id="graincover">
+		<img src="assets/homepage/grain-overlay.png" alt="" id="grainimg">
+	</div>
+	<div id="videocover"></div>
+	<video autoplay loop muted id="vid-light" class="backvid">
+		<source src="assets/homepage/back-light.webm" type="video/webm">
+		<source src="assets/homepage/back-light.mp4" type="video/mp4">
+	</video>
+	<video autoplay loop muted id="vid-dark" class="backvid">
+		<source src="assets/homepage/back-dark.webm" type="video/webm">
+		<source src="assets/homepage/back-dark.mp4" type="video/mp4">
+	</video>
+	<img class="logoimg" src="assets/img/logo-white.svg" alt="Erik's Space logo"/>
+</div>
+<img class="earthimg" src="assets/homepage/earth.webp" alt="Welcome to my homepage!"/>
+</body>
+</html>

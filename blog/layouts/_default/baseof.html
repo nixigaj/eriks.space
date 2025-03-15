@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="{{ $.Site.LanguageCode }}">
+{{- partial "head.html" . -}}
+<body a="{{ $.Site.Params.theme_config.appearance | default "auto" }}">
+<main class="page-content" aria-label="Content">
+	<div class="w">
+		<div class="eriks-header" style="margin-bottom: 2rem">
+			<a href="/"><h1>Erik Junsved</h1></a>
+			<p aria-label="Links" class="linkstext">{<a href="/about">about</a>, <a href="/blog">blog</a>, <a target="_self" href="https://github.com/nixigaj">github</a>}</p>
+		</div>
+		{{ if not .IsHome }}
+		<div class="post-meta">
+			{{ partial "back_link.html" . }}
+			<p>
+				<time datetime="{{ .Date }}">
+					{{ .Date | time.Format site.Params.theme_config.date_format }}
+				</time>
+			</p>
+		</div>
+		{{ end }}
+		{{- block "main" . }}{{- end }}
+
+		{{ if not .IsHome }}
+		<script src="https://giscus.app/client.js"
+				data-repo="nixigaj/eriks.space"
+				data-repo-id="R_kgDOOI230w"
+				data-category="Announcements"
+				data-category-id="DIC_kwDOOI23084CoDCD"
+				data-mapping="pathname"
+				data-strict="0"
+				data-reactions-enabled="1"
+				data-emit-metadata="0"
+				data-input-position="bottom"
+				data-theme="preferred_color_scheme"
+				data-lang="en"
+				crossorigin="anonymous"
+				async>
+		</script>
+		{{ end }}
+
+		<div style="text-align: center; padding-top: 1rem">
+			{{ partial "footer.html" }}
+		</div>
+		<img src="/assets/img/logo-black.svg" alt="Logo" width="400px" class="svg-logo" style="padding-top: 1rem;">
+	</div>
+</main>
+</body>
+{{- if .Params.custom_js -}}
+{{- range .Params.custom_js -}}
+{{ $js := resources.Get (print "js/" . ".js") }}
+<script type="text/javascript" src="{{ $js.RelPermalink }}"></script>
+{{- end -}}
+{{- end -}}
+</html>

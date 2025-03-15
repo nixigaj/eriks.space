@@ -1,0 +1,30 @@
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" sizes="32x32" href="/assets/img/favicon-32x32.png">
+	<link rel="icon" sizes="16x16" href="/assets/img/favicon-16x16.png">
+	<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+	<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+	<link rel="mask-icon" href="/assets/img/mask-favicon.svg" color="#3333ff">
+	<link rel="stylesheet" href="/assets/font/eriks-space/stylesheet.css">
+	<link rel="stylesheet" href="/assets/font/jetbrains-mono/stylesheet.css">
+	{{ if .IsPage }} <meta name="description" content="{{ .Summary }}"> {{ end }}
+
+	<title>
+		{{ if not .IsHome }}
+		{{ $.Site.Title }} | {{ .Title }}
+		{{ else }}
+		{{ $.Site.Title }} | Blog
+		{{ end }}
+	</title>
+
+
+
+	<link rel="shortcut icon" type="image/x-icon" href="{{ $.Site.Params.favicon | relURL }}" />
+	{{ $options := (dict "outputStyle" "compressed" "enableSourceMap" (not hugo.IsProduction)) }}
+	{{ $sass := resources.Get "css/main.scss" }}
+	{{ $style := $sass | toCSS $options | resources.Fingerprint "sha512" }}
+	<link rel="stylesheet" href="{{ $style.Permalink | relURL }}" integrity="{{ $style.Data.Integrity }}" />
+	{{ if .Params.mathjax }} {{ partial "mathjax.html" . }} {{ end }}
+</head>

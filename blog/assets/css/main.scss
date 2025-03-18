@@ -118,6 +118,7 @@ hr {
 pre {
 	padding: 1em;
 	overflow-x: auto; /* Fix pre content overflowing parent without scroll bar */
+	scrollbar-color: #fff #000;
 }
 
 table { width: 100%; }

@@ -2,7 +2,7 @@
 
 ![Screenshot of website](screenshot.png)
 
-This is the souce for my personal website. It is a combination of handwritten HTML/CSS and a [Hugo theme](https://github.com/hanwenguo/hugo-theme-nostyleplease). Don't look to hard at the code. 😊
+This is the source for my personal website. It is a combination of handwritten HTML/CSS and a [Hugo theme](https://github.com/hanwenguo/hugo-theme-nostyleplease). Don't look too hard at the code. 😊
 
 ## License
 

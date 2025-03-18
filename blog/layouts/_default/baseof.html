@@ -20,6 +20,7 @@
 		{{ end }}
 		{{- block "main" . }}{{- end }}
 
+		{{ if not .Site.BuildDrafts }}
 		{{ if not .IsHome }}
 		<script src="https://giscus.app/client.js"
 				data-repo="nixigaj/eriks.space"
@@ -36,6 +37,7 @@
 				crossorigin="anonymous"
 				async>
 		</script>
+		{{ end }}
 		{{ end }}
 
 		<div style="text-align: center; padding-top: 1rem">

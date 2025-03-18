@@ -12,8 +12,14 @@ def fix_sitemap(input_file):
 
 	for url in root.findall('ns:url', ns):
 		loc = url.find('ns:loc', ns)
-		if loc is not None and any(p in loc.text for p in ['/blog/categories/', '/blog/tags/']):
-			root.remove(url)
+		if loc is not None:
+			if not loc.text.startswith("https://eriks.space"):
+				loc.text = "https://eriks.space" + loc.text
+
+			if any(p in loc.text for p in ['/blog/categories/', '/blog/tags/']):
+				root.remove(url)
+
+
 
 	xml_str = Et.tostring(root, encoding='utf-8', method='xml').decode()
 

@@ -1,7 +1,7 @@
 ---
 title: "How I set up my SSH with WireGuard on new servers"
 date: 2025-03-15T19:24:33+01:00
-draft: false
+draft: true
 ---
 
 ![Laptop with WireGuard set up in the terminal](/post-assets/wg-setup/laptop.jpg)

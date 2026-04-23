@@ -1,0 +1,9 @@
+# Editors
+.idea
+.vscode
+
+# Build
+build
+
+# Runtime
+visitors.bin
